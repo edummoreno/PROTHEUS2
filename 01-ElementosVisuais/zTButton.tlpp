@@ -1,0 +1,28 @@
+#include 'totvs.ch'
+
+
+//@see https://tdn.totvs.com/display/tec/Construtor+TButton%3ANew
+user function zTButton()
+	local oDlg
+	local oButton,oButton2,oButton3,oButton4,oButton5
+
+	oDlg := TDialog():New(180, 180, 550, 700, 'Exemplo TDialog', , , , , CLR_BLACK, CLR_WHITE, , , .T.)
+
+
+	oButton  := TButton():New(020, 050, "Clientes"    , oDlg, {||MATA030()} , 50, 10, , , .F., .T., .F., , .F., , , .F.)
+	oButton2 := TButton():New(040, 050, "Fornecedores", oDlg, {||MATA020()} , 50, 10, , , .F., .T., .F., , .F., , , .F.)
+    oButton3 := TButton():New(060, 050, "Produtos"    , oDlg, {||MATA010()} , 50, 10, , , .F., .T., .F., , .F., , , .F.)
+    oButton4 := TButton():New(080, 050, "Bancos"      , oDlg, {||MATA070()} , 50, 10, , , .F., .T., .F., , .F., , , .F.)
+    oButton5 := TButton():New(100, 050, "Fechar"      , oDlg, {||oDlg:End()}, 50, 10, , , .F., .T., .F., , .F., , , .F.)
+    /*
+    1º coordenada vertical
+    2º coordenada horizontal
+    3º titulo do botão
+    4º Elemento onde ele será fixado
+    5º Ação executada ao clica no botão ao clicar com o botão esquerdo do mouse
+    */
+
+	oDlg:Activate(,,,.T.)
+
+
+return

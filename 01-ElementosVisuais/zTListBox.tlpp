@@ -1,0 +1,22 @@
+#include 'totvs.ch'
+#include 'Protheus.ch'
+
+//@see https://tdn.totvs.com/display/tec/TListBox
+//@see https://tdn.totvs.com/display/tec/Construtor+TListBox%3ANew
+user function zTListBox()
+	local oDlg
+    //                  1       2       3       4           5           6               7                   
+    local aOpcao := {"Feliz","Triste","Calmo","Otimista","Bitcoin","Alta infinita","Modelo Stock to Flow"}
+	local nOpcao := 5
+    local oRadio //variavel que armazenará o Objeto
+
+    oDlg := TDialog():new(0,0,500,700,'Painel de lista',,,,,CLR_BLACK,CLR_WHITE,,,.T.)
+    oRadio := TListBox():New(010,010,{|u|if(Pcount()>0,nOpcao:=u,nOpcao)},aOpcao,100,100,,oDlg,,,,.T.)
+    
+    oRadio:bChange :={||FWAlertSuccess(aOpcao[nOpcao],"Voce selecionou ")}
+    oButton1 := TButton():New(10, 130, "Mostrar Escolha", oDlg,{|| FWAlertSuccess(aOpcao[nOpcao],"Voce selecionou ")}, 60,15,,,.F.,.T.,.F.,,.F.,,,.F. )
+
+	oDlg:Activate(,,,.T.)
+
+
+RETURN

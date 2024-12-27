@@ -1,0 +1,21 @@
+#include 'totvs.ch'
+#include 'Protheus.ch'
+
+//@see https://tdn.totvs.com/display/tec/TRadMenu
+user function zTRadmenu()
+	local oDlg
+    //                  1       2       3       4           5           6               7                   
+    local aOpcao := {"Feliz","Triste","Calmo","Otimista","Bitcoin","Alta infinita","Modelo Stock to Flow"}
+	local nOpcao := 6
+    local oRadio //variavel que armazenará o Objeto
+
+    oDlg := TDialog():new(0,0,500,700,'Painel de Opções',,,,,CLR_BLACK,CLR_WHITE,,,.T.)
+    oRadio := TRadMenu():New(10,10,aOpcao,{|u| IIF(PCount()>0,nOpcao := u, nOpcao)},oDlg,,,,,,,,100,12,,,,.T.)
+    
+    oButton1 := TButton():New(80, 10, "Mostrar Escolha", oDlg,{|| FWAlertSuccess(aOpcao[nOpcao],"Hoje você está")}, 60,15,,,.F.,.T.,.F.,,.F.,,,.F. )
+
+	oDlg:Activate(,,,.T.)
+
+
+RETURN
+

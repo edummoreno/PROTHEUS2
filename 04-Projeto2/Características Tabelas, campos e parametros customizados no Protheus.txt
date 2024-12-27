@@ -1,0 +1,27 @@
+As tabelas customizadas no Protheus
+devem, por obrigação e/ou boas práticas, começar com SZ ou Z;
+
+ZA1,ZA2,ZA3,ZA4,ZA5,ZA6,ZA7
+SZ1,SZ2,SZ3,SZ4,SZ5
+
+A Totvs deixa esses nomes reservados para que os clientes possam
+customizar o produto, criar tabelas, sendo assim, as tabelas criadas
+pela TOTVS, não irão sobrepor, as tabelas criadas pelos usuários;
+------------
+
+Da mesma forma, isso vale para os campos das tabelas padrão(SA1,SB1,SF2,SD2), para 
+criar campos customizados/personalizados, devemos colocar sempre a letra X ou Y, após o prefixo do campo, por exemplo:
+Você está customizando um campo na tela SB1, e esse campo se chamará
+B1_PROTHEUZ, ao invés de criar desta forma, crie assim:
+B1_XPROTHEUZ, esse campo não será substituído, porque a fabricante do software, não criará nenhum campo em tabelas padrão, ou pelo menos não deveria, com o prefixo
+seguido de X ou Y, após o UNDERLINE.
+
+---------
+Parâmetros
+
+Nos parâmetros, temo o nome MV_TEM_DI, a TOTVS orienta que os parametros criados pelos terceiros(usuários, programdores, analistas, cientistas, protheuzeiros, etc), tenham o seguinte prefixo MV_XALGUMACOISA, MV_XYALGUMACOISA.
+Assim funcionam os parâmetros personalizados e/ou customizados;
+
+-------
+Concluindo...
+Se você não seguir o que está acima, o que você customizar, poderá ser substituído no futuro.

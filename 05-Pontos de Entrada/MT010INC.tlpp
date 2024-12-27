@@ -1,0 +1,17 @@
+#include 'Protheus.ch'
+
+/*/{Protheus.doc} MT010INC
+Ponto de entrada executado após a inserção dos produtos
+@type function
+@version 
+@author Eduardo Neto
+@since 25/10/2020
+@return return_type, return_description
+@see https://tdn.totvs.com/pages/releaseview.action?pageId=6087685
+/*/
+User Function MT010INC()
+
+	MsgInfo("Você acabou de inserir com sucesso o Produto:"+Chr(10)+Chr(13)+;
+		M->B1_DESC)
+
+return

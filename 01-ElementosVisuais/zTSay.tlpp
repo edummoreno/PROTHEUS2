@@ -1,0 +1,35 @@
+#include 'totvs.ch'
+
+//@see https://tdn.totvs.com/display/tec/Construtor+TSay%3ANew
+User Function zTsay()
+	local oDlg,oButton,oButton2,oButton3,oButton4,oButton5
+	local oSay1,oSay2,oSay3,oSay4,oSay5,oSay6
+
+	oDlg := TDialog():New(180, 180, 550, 700, 'Exemplo TDialog', , , , , CLR_BLACK, CLR_WHITE, , , .T.)
+
+
+    /*
+    1º coordenada vertical
+    2º coordenada horizontal
+    3º titulo do botão
+    4º Elemento onde ele será fixado
+    5º Ação executada ao clica no botão ao clicar com o botão esquerdo do mouse
+    */
+	oButton  := TButton():New(020, 050, "Clientes"    , oDlg, {||MATA030()} , 50, 10, , , .F., .T., .F., , .F., , , .F.)
+	oButton2 := TButton():New(040, 050, "Fornecedores", oDlg, {||MATA020()} , 50, 10, , , .F., .T., .F., , .F., , , .F.)
+	oButton3 := TButton():New(060, 050, "Produtos"    , oDlg, {||MATA010()} , 50, 10, , , .F., .T., .F., , .F., , , .F.)
+	oButton4 := TButton():New(080, 050, "Bancos"      , oDlg, {||MATA070()} , 50, 10, , , .F., .T., .F., , .F., , , .F.)
+	oButton5 := TButton():New(100, 050, "Fechar"      , oDlg, {||oDlg:End()}, 50, 10, , , .F., .T., .F., , .F., , , .F.)
+
+	//objeto := Clase:Metodo
+	oSay1 := TSay():New(01, 10, {|| 'Telinha Personalizada' }, oDlg, , , , , , .T., , , 400, 300, , , , , ,)
+	oSay2 := TSay():New(10, 50, {|| 'abrir clientes' }       , oDlg, , , , , , .T., , , 400, 300, , , , , ,)
+	oSay3 := TSay():New(30, 50, {|| 'abir Fornecedores' }    , oDlg, , , , , , .T., , , 400, 300, , , , , ,)
+	oSay4 := TSay():New(50, 50, {|| 'abir Produtos' }        , oDlg, , , , , , .T., , , 400, 300, , , , , ,)
+	oSay5 := TSay():New(70, 50, {|| 'abir Bancos' }          , oDlg, , , , , , .T., , , 400, 300, , , , , ,)
+	oSay6 := TSay():New(90, 50, {|| 'Fechar' }               , oDlg, , , , , , .T., , , 400, 300, , , , , ,)
+
+	oDlg:Activate(,,,.T.)
+
+
+return

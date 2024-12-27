@@ -1,0 +1,14 @@
+#include 'totvs.ch'
+#include 'topconn.ch'
+
+//@see https://tdn.totvs.com/display/tec/DBSelectArea
+//@see https://tdn.totvs.com/display/public/framework/DBSelectArea
+//@see https://tdn.totvs.com/display/tec/DBSetOrder
+user function CriaSZ1()
+
+    DBSelectArea("SZ1") //seleciona a area, se a tabela não estiver criada, ele vai criar
+    DBSetOrder(1)
+    SZ1->(DBCloseArea())
+
+
+return

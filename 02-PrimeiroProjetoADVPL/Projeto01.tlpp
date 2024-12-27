@@ -1,0 +1,211 @@
+#include 'totvs.ch'
+
+
+user function projeto01()
+	local oDlg
+	local cTituloJanela := "Projeto01 - primeira tela"
+	private oFolder
+	private aFolder1
+
+
+
+
+	//variaveis referentes aos objetos do folder1(dados pessoais)
+	private oSayNome0
+	private oSayNome1
+	private oGetNome1
+	private cGetNome := space(30)
+	private oGetNomeReduzido
+	private cGetNomeReduz := space(30)
+
+
+
+	//Objetos
+	oDlg := TDialog():New(0,0,720,1250,cTituloJanela,,,,,CLR_BLACK,CLR_WHITE,,,.T.)
+	aFolder1 := {'Dados Pessoais','Endereço','Outros','aba 04'}
+	oFolder1 := TFolder():New( 10,10,aFolder1,,oDlg,,,,.T.,,600,200 )
+
+
+	//elementos folder 1
+	oSayNome0 := TSay():New(01, 50, {|| 'Telinha Personalizada' }, oDlg, , , , , , .T., , , 400, 300, , , , , ,)
+	oSayNome1 := TSay():New(01, 05, {|| 'Nome Completo' }, oFolder1:aDialogs[1], , , , , , .T., , , 400, 300, , , , , ,)
+	oGetNome1 := TGet():New(10, 05 , {|u|iif(PCount()==0,cGetNome,cGetNome:=u)}, oFolder1:aDialogs[1], 080, 010, "@!", , 0, , , .F., , .T., , .F., , .F., .F., , .F., .F., , cGetNome, , , ,)
+
+
+	oSayNomeReduzido := TSay():New(01, 110, {|| 'Nome' }, oFolder1:aDialogs[1], , , , , , .T., , , 400, 300, , , , , ,)
+	oGetNomeReduzido := TGet():New(10, 110 , {|u|iif(PCount()==0,cGetNomeReduz,cGetNomeReduz:=u)}, oFolder1:aDialogs[1], 060, 010, "@!", , 0, , , .F., , .T., , .F., , .F., .F., , .F., .F., , cGetNomeReduz, , , ,)
+
+	oSayDataNasc := TSay():New(01, 180, {|| 'Data' }, oFolder1:aDialogs[1], , , , , , .T., , , 400, 300, , , , , ,)
+	dDataNasc    := Date()
+	oGetDataNasc := TGet():New(10, 180 , {|u|iif(PCount()==0,dDataNasc,dDataNasc:=u)}, oFolder1:aDialogs[1], 060, 010, "@!", , 0, , , .F., , .T., , .F., , .F., .F., , .F., .F., , /**/, , , ,.T.)
+
+	oSayDDD := TSay():New(01, 250, {|| 'DDD' }, oFolder1:aDialogs[1], , , , , , .T., , , 400, 300, , , , , ,)
+	cGetDDD := space(4)
+	oGetDDD := TGet():New(10, 250 , {|u|iif(PCount()==0,cGetDDD,cGetDDD:=u)}, oFolder1:aDialogs[1], 020, 010, "@E (99)", , 0, , , .F., , .T., , .F., , .F., .F., , .F., .F., , cGetDDD, , , ,)
+
+	oSayCel := TSay():New(01, 280, {|| 'Telefone' }, oFolder1:aDialogs[1], , , , , , .T., , , 400, 300, , , , , ,)
+	nGetCel := space(11)
+	oGetCel := TGet():New(10, 280 , {|u|iif(PCount()==0,nGetCel,nGetCel:=u)}, oFolder1:aDialogs[1], 060, 010, "@E 9-9999-9999", , 0, , , .F., , .T., , .F., , .F., .F., , .F., .F., , nGetCel, , , ,)
+
+	//TGroup o dimensionamento e diferente
+	oGroupSexo := TGroup():New(05,350,50,480,'Sexo',oFolder1:aDialogs[1],,,.T.)
+	aSexo := {"Marculino","Feminino"}
+	nSexo := 1
+	oRadioSexo := TRadMenu():New(15,360,aSexo,{|u| IIF(PCount()>0,nSexo := u, nSexo)},oFolder1:aDialogs[1],,,,,,,,080,12,,,,.T.)
+
+	oSayCPF := TSay():New(28, 05, {|| 'CPF' }, oFolder1:aDialogs[1], , , , , , .T., , , 400, 300, , , , , ,)
+	cGetCPF := space(14)
+	oGetCPF := TGet():New(35, 05 , {|u|iif(PCount()==0,cGetCPF,cGetCPF:=u)}, oFolder1:aDialogs[1], 080, 010, "@E 999-999-999-99", , 0, , , .F., , .T., , .F., , .F., .F., , .F., .F., , cGetCPF, , , ,)
+
+	oButton1 := TButton():New(070, 050, "Validar Dados Pessoais"    , oFolder1:aDialogs[1], {||ShowDadosPessoais()} , 100, 25, , , .F., .T., .F., , .F., , , .F.)
+
+	//elementos folder 2
+	oSayEndereco   := TSay():New(01, 05 , {|| 'Endereço' }      , oFolder1:aDialogs[2], , , , , , .T., , , 400, 300, , , , , ,)
+	oSayBairro     := TSay():New(01, 140, {|| 'Bairro' }        , oFolder1:aDialogs[2], , , , , , .T., , , 400, 300, , , , , ,)
+	oSayTipoImovel := TSay():New(01, 230, {|| 'Tipo de Imovel' }, oFolder1:aDialogs[2], , , , , , .T., , , 400, 300, , , , , ,)
+	oSayCep        := TSay():New(01, 310, {|| 'CEP' }           , oFolder1:aDialogs[2], , , , , , .T., , , 400, 300, , , , , ,)
+	oSayEstado     := TSay():New(34, 05,  {|| 'Estado' }        , oFolder1:aDialogs[2], , , , , , .T., , , 400, 300, , , , , ,)
+	oSayCidade     := TSay():New(34, 110, {|| 'Cidade' }        , oFolder1:aDialogs[2], , , , , , .T., , , 400, 300, , , , , ,)
+
+	cGetEndereco := space(40)
+	cGetBairro   := space(30)
+	aImovel      := {"Casa", "Apartamento", "Outro"}
+	cImovel      := aImovel[1]
+	cGetCep      := space(9)
+	cGetEstado   := space(4)
+	aComboEstado := {"AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RO", "RS", "RR", "SC", "SE", "SP", "TO"}
+	cEstado      := aComboEstado[1]
+	cGetCidade   := space(30)
+
+	oGetEndereco := TGet():New(10, 05 , {|u|iif(PCount()==0,cGetEndereco,cGetEndereco:=u)}, oFolder1:aDialogs[2], 120, 010, "@!"          , , 0, , , .F., , .T., , .F., , .F., .F., , .F., .F., , cGetEndereco, , , ,)
+	oGetBairro   := TGet():New(10, 140, {|u|iif(PCount()==0,cGetBairro,cGetBairro:=u)}    , oFolder1:aDialogs[2], 080, 010, "@!"          , , 0, , , .F., , .T., , .F., , .F., .F., , .F., .F., , cGetBairro  , , , ,)
+	oGetCep      := TGet():New(10, 310, {|u|iif(PCount()==0,cGetCep,cGetCep:=u)}          , oFolder1:aDialogs[2], 080, 010, "@E 99999-999", , 0, , , .F., , .T., , .F., , .F., .F., , .F., .F., , cGetCep     , , , ,)
+	oGetCidade   := TGet():New(45, 110, {|u|iif(PCount()==0,cGetCidade,cGetCidade:=u)}    , oFolder1:aDialogs[2], 080, 010, "@!"          , , 0, , , .F., , .T., , .F., , .F., .F., , .F., .F., , cGetCidade  , , , ,)
+
+	oComboImovel := TComboBox():New(10, 230, {|u|if(PCount()>0,cImovel:=u,cImovel)}, aImovel     , 060, 20, oFolder1:aDialogs[2], , {||}, , , , .T., , , , , , , , , 'Imovel')
+	oComboEstado := TComboBox():New(45, 05 , {|u|if(PCount()>0,cEstado:=u,cEstado)}, aComboEstado, 080, 20, oFolder1:aDialogs[2], , {||}, , , , .T., , , , , , , , , 'Imovel')
+
+
+	oButton2 := TButton():New(070, 050, "Validar Endereço"    , oFolder1:aDialogs[2], {||ShowEndereco()} , 100, 25, , , .F., .T., .F., , .F., , , .F.)
+
+	//elementos folder 3
+	oSayEstadoCivil := TSay():New(01,05,{||'Estado Civil'},oFolder1:aDialogs[3],,,,,,.T.,CLR_BLUE,CLR_WHITE,300,20)
+	oSayObservacao  := TSay():New(01,350,{||'Observacão'},oFolder1:aDialogs[3],,,,,,.T.,CLR_BLUE,CLR_WHITE,300,20)
+
+	aEstadoCivil := {"Solteiro","Namorando","Casado"}
+	cEstadoCivil := aEstadoCivil[1]
+	aRadioPet    := {"Sim","Não"}
+	nRadioPet    := 1
+
+
+	oComboEstadoCivil := TComboBox():New(10, 05, {|u|if(PCount()>0,cEstadoCivil:=u,cEstadoCivil)}, aEstadoCivil     , 070, 20, oFolder1:aDialogs[3], , {||}, , , , .T., , , , , , , , , 'Imovel')
+
+
+	oGroupPet := TGroup():New(01,120,60,210,'Possui Pet',oFolder1:aDialogs[3],,,.T.)
+	oRadioPet := tRadMenu():New(10,130,aRadioPet,{|u| iif(PCount()>0,nRadioPet :=u,nRadioPet )},oFolder1:aDialogs[3],,,,,,,,30,20,,,,.T.)
+
+
+	lCheckADVPL  := .F.
+	lCheckSQL    := .F.
+	lCheckCSHARP := .F.
+	lCheckPython := .F.
+
+	oGrouplinguagem     := TGroup():New(01,225,60,315,'Linguagem que domina',oFolder1:aDialogs[3],,,.T.)
+	oCheckADVPL         := TCheckBox():New(10,230,'ADVPL',{|| lCheckADVPL},oFolder1:aDialogs[3],100,210,,{|| lCheckADVPL := !lCheckADVPL},,,,,,.T.,,,)
+
+	oCheckSQL           := TCheckBox():New(20,230,'SQL',,oFolder1:aDialogs[3],100,210,,,,,,,,.T.,,,)
+	oCheckSQL:bSetGet   := {|| lCheckSQL}
+	oCheckSQL:bLClicked := {|| lCheckSQL := !lCheckSQL}
+
+	oCheckCSHARP            := TCheckBox():New(30,230,'CSharp',,oFolder1:aDialogs[3],100,210,,,,,,,,.T.,,,)
+	oCheckCSHARP:bSetGet    := {|| lCheckCSHARP}
+	oCheckCSHARP:bLClicked  := {|| lCheckCSHARP := !lCheckCSHARP}
+
+	oCheckPython            := TCheckBox():New(40,230,'Python',,oFolder1:aDialogs[3],100,210,,,,,,,,.T.,,,)
+	oCheckPython:bSetGet    := {|| lCheckPython}
+	oCheckPython:bLClicked  := {|| lCheckPython := !lCheckPython}
+
+	oButtonMarcarTodos    := TButton():New(22, 265, "Todas"  , oFolder1:aDialogs[3], {||MarcarTodos()}   , 40, 10, , , .F., .T., .F., , .F., , , .F.)
+	oButtonDesmarcarTodos := TButton():New(35, 265, "Nenhuma", oFolder1:aDialogs[3], {||DesmarcarTodos()}, 40, 10, , , .F., .T., .F., , .F., , , .F.)
+
+	//@see https://tdn.totvs.com/pages/viewpage.action?pageId=203771190
+	cObservacao          := "Digite aqui as características de Protheuzeiro que te definem"
+	oTMultigetObservacao := TMultiget():New(10,350, {|u|if(pCount()>0,cObservacao := u, cObservacao) }, oFolder1:aDialogs[3], 200, 100, , , , , , .T. )
+
+	oButton3 := TButton():New(070, 050, "Validar Outros"    , oFolder1:aDialogs[3], {||ShowOutros()} , 100, 25, , , .F., .T., .F., , .F., , , .F.)
+
+	//Fora do Folder
+    //@see https://tdn.totvs.com/display/tec/TBitmap
+	oBmpIncluir := TBitmap():New(220,30,142,142,,;
+    "C:\TOTVS12.1.33\Protheus\protheus_data\system\imagens\incluirprotheuzeiro.bmp",.T.,oDlg,{||Alert("Clicou em Imagem Incluir")},,.F.,.F.,,,.F.,,.T.,,.F.)
+	oBmpIncluir:lAutoSize := .T.
+
+	oBmpAlterar := TBitmap():New(220,90,142,142,,;
+    "C:\TOTVS12.1.33\Protheus\protheus_data\system\imagens\alterarprotheuzeiro.bmp",.T.,oDlg,{||Alert("Clicou em Imagem Alterar")},,.F.,.F.,,,.F.,,.T.,,.F.)
+	oBmpAlterar:lAutoSize := .T.
+
+	oBmpConsultar := TBitmap():New(220,150,142,142,,;
+    "C:\TOTVS12.1.33\Protheus\protheus_data\system\imagens\consultarprotheuzeiro.bmp",.T.,oDlg,{||Alert("Clicou em Imagem Consultar")},,.F.,.F.,,,.F.,,.T.,,.F.)
+	oBmpConsultar:lAutoSize := .T.
+
+	oBmpExcluir := TBitmap():New(220,210,142,142,,;
+    "C:\TOTVS12.1.33\Protheus\protheus_data\system\imagens\excluirprotheuzeiro.bmp",.T.,oDlg,{||Alert("Clicou em Imagem Excluir")},,.F.,.F.,,,.F.,,.T.,,.F.)
+	oBmpExcluir:lAutoSize := .T.
+
+	oButtonIncluir   := TButton():New(250, 25 , "Incluir"  , oDlg, {||}, 40, 15, , , .F., .T., .F., , .F., , , .F.)
+	oButtonAlterar   := TButton():New(250, 80 , "Alterar"  , oDlg, {||}, 40, 15, , , .F., .T., .F., , .F., , , .F.)
+	oButtonConsultar := TButton():New(250, 140, "Consultar", oDlg, {||}, 40, 15, , , .F., .T., .F., , .F., , , .F.)
+	oButtonExcluir   := TButton():New(250, 200, "Excluir"  , oDlg, {||}, 40, 15, , , .F., .T., .F., , .F., , , .F.)
+
+
+	oDlg:Activate(,,,.T.)
+
+
+return NIL
+
+static function MarcarTodos()
+	lCheckADVPL  := .T.
+	lCheckSQL    := .T.
+	lCheckCSHARP := .T.
+	lCheckPython := .T.
+return
+
+static function DesmarcarTodos()
+	lCheckADVPL  := .F.
+	lCheckSQL    := .F.
+	lCheckCSHARP := .F.
+	lCheckPython := .F.
+return
+
+static function ShowDadosPessoais()
+
+	MsgInfo("Nome................."+cGetNome+Chr(13)+Chr(10)+;
+		"Nome Reduzido........"+cGetNomeReduz+Chr(13)+Chr(10)+;
+		"Data de Nascimento..."+Dtoc(dDataNasc)+Chr(13)+Chr(10)+;
+		"DDD.................."+cGetDDD+Chr(13)+Chr(10)+;
+		"Telefone............."+nGetCel+Chr(13)+Chr(10)+;
+		"Sexo................."+ aSexo[nSexo]+Chr(13)+Chr(10)+;
+		"CPF.................."+ cGetCPF+Chr(13)+Chr(10))
+
+
+return
+
+static function ShowEndereco()
+	MsgInfo("Endereço............." + cGetEndereco+Chr(13)+Chr(10)+;
+		"Bairro..............."+ cGetBairro+Chr(13)+Chr(10)+;
+		"Imovel..............."+cImovel+Chr(13)+Chr(10)+;
+		"Cep.................."+ cGetCep+Chr(13)+Chr(10)+;
+		"Estado..............."+cGetEstado+Chr(13)+Chr(10))
+
+return
+
+static function ShowOutros()
+	MsgInfo("Estado Civil:........"+cEstadoCivil+Chr(13)+Chr(10)+;
+		"Possui Pet:.........."+aRadioPet[nRadioPet]+Chr(13)+Chr(10)+;
+		"ADVPL?:.............."+IIF(lCheckADVPL = .T.,"Sim","Não")+Chr(13)+Chr(10)+;
+		"SQL?:................"+IIF(lCheckSQL,"Sim","Não")+Chr(13)+Chr(10)+;
+		"CSHARP?:............."+IIF(lCheckCSHARP,"Sim","Não")+Chr(13)+Chr(10)+;
+		"PYTHON?:............."+IIF(lCheckPython,"Sim","Não")+Chr(13)+Chr(10)+;
+		"Observacao:.........."+cObservacao,"ABA OUTROS")
+
+return

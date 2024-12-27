@@ -1,0 +1,56 @@
+#include 'totvs.ch'
+
+//@see https://tdn.totvs.com/display/tec/TCheckBox
+//@see https://tdn.totvs.com/display/tec/Construtor+TCheckBox%3ANew
+user function zTCheckBox()
+	local oDlg
+	private oRadio1,oRadio2 //variavel que armazenará o Objeto
+	private lCheck2 := .F., lCheck1 := .F.
+
+
+	oDlg := TDialog():new(0,0,500,700,'Painel de lista',,,,,CLR_BLACK,CLR_WHITE,,,.T.)
+
+	oRadio1 := TCheckBox():New(10,10,'CheckBox 001',{|| lCheck1},oDlg,100,210,,{|| lCheck1 := !lCheck1,IIF(lCheck1,MsgInfo("Marcado!"),MsgInfo("Desmarcado!"))},,,,,,.T.,,,)
+	oRadio2 := TCheckBox():New(20,10,'CheckBox 002',,oDlg,100,210,,,,,,,,.T.,,,)
+	oRadio2:bSetGet   := {|| lCheck2}
+	oRadio2:bLClicked := {|| lCheck2 := !lCheck2,IIF(lCheck2,MsgInfo("Marcado!"),MsgInfo("Desmarcado!"))}
+
+
+
+	oButton1 := TButton():New(10, 130, "Mostrar Escolha", oDlg, {|| check(lCheck1,lCheck2)}, 60, 15, , , .F., .T., .F., , .F., , , .F.)
+	oButton2 := TButton():New(30, 130, "Marcar todos"   , oDlg, {|| MarcarTodos()}         , 60, 15, , , .F., .T., .F., , .F., , , .F.)
+	oButton2 := TButton():New(50, 130, "Desmarcar todos", oDlg, {|| Desmarcartodos()}      , 60, 15, , , .F., .T., .F., , .F., , , .F.)
+	oDlg:Activate(,,,.T.)
+
+
+RETURN
+
+static function check(lCheck1,lCheck2)
+	//alltochar todas as opções para char
+	IF(lCheck1 .AND. !lCheck2 )
+		FWAlertSuccess(alltochar(lCheck1),"SOMENTE BOTAO 1 MARCADO")
+	elseif (!lCheck1 .AND. lCheck2 )
+		FWAlertSuccess(alltochar(lCheck2),"SOMENTE BOTAO 2 MARCADO")
+	elseif (lCheck1 .AND. lCheck2 )
+		FWAlertSuccess(".T.","Os dois botoes estao marcados")
+	else
+		FWAlertSuccess(".F.","Nenhum botão está marcado")
+	endif
+
+
+
+return
+
+static function MarcarTodos()
+	lCheck1 := .T.
+	lCheck2 := .T.
+	oRadio1:Refresh()
+	oRadio2:Refresh()
+return
+
+static function Desmarcartodos()
+	lCheck1 := .F.
+	lCheck2 := .F.
+	oRadio1:Refresh()
+	oRadio2:Refresh()
+return

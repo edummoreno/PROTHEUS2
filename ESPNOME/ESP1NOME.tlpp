@@ -1,0 +1,12 @@
+#include    'totvs.ch'
+
+//ESPNOME ESP1NOME ESP2NOME
+/*No Protheus existe opção de criação de até três módulos específicos. 
+Na realidade eles já existem, mas para que eles estejam disponíveis 
+na escolha do módulos é necessário dar um nome a cada um deles
+@SEE https://sempreju.com.br/criacao-de-modulos-especificos-no-protheus/
+*/
+user function ESP1NOME()
+	cRet := "EDUARDO"
+
+RETURN cRet

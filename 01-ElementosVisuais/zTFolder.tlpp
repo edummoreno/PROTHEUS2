@@ -1,0 +1,63 @@
+#include 'totvs.ch'
+
+//@see https://tdn.totvs.com/display/tec/TFolder
+user FUNCTION zTFolder()
+	local oDlg
+	local oFolder1
+	local aFolder1
+
+	oDlg := TDialog():new(0,0,400,555,'TFolder',,,,,CLR_BLACK,CLR_WHITE,,,.T.)
+
+	//DEFINE DIALOG oDlg TITLE "TFolder" FROM 180,180 TO 550, 700 PIXEL
+	aFolder1 := {'Aba 01','Aba 02','Aba 03','aba 04'}
+	oFolder1 := TFolder():New( 10,10,aFolder1,,oDlg,,,,.T.,,260,184 )
+
+	oSay1 := TSay():New(10, 10, {|| 'Folder 1' }, oFolder1:aDialogs[1], , , , , , .T., , , 400, 300, , , , , ,)
+	oSay2 := TSay():New(10, 10, {|| 'Folder 2' }, oFolder1:aDialogs[2], , , , , , .T., , , 400, 300, , , , , ,)
+	oSay3 := TSay():New(10, 10, {|| 'Folder 3' }, oFolder1:aDialogs[3], , , , , , .T., , , 400, 300, , , , , ,)
+	oSay4 := TSay():New(10, 10, {|| 'Folder 4' }, oFolder1:aDialogs[4], , , , , , .T., , , 400, 300, , , , , ,)
+
+
+	cGet1 := space(20)
+	oGet1 := TGet():New(30, 10 , {|u|iif(PCount()==0,cGet1,cGet1:=u)}, oFolder1:aDialogs[1], 060, 010, "@!", , 0, , , .F., , .T., , .F., , .F., .F., , .F., .F., , cGet1, , , ,)
+	cGet2 := space(20)
+	oGet2 := TGet():New(30, 10 , {|u|iif(PCount()==0,cGet2,cGet2:=u)}, oFolder1:aDialogs[2], 060, 010, "@!", , 0, , , .F., , .T., , .F., , .F., .F., , .F., .F., , cGet2, , , ,)
+	cGet3 := space(20)
+	oGet3 := TGet():New(30, 10 , {|u|iif(PCount()==0,cGet3,cGet3:=u)}, oFolder1:aDialogs[3], 060, 010, "@!", , 0, , , .F., , .T., , .F., , .F., .F., , .F., .F., , cGet3, , , ,)
+	cGet4 := space(20)
+	oGet4 := TGet():New(30, 10 , {|u|iif(PCount()==0,cGet4,cGet4:=u)}, oFolder1:aDialogs[4], 060, 010, "@!", , 0, , , .F., , .T., , .F., , .F., .F., , .F., .F., , cGet4, , , ,)
+
+
+	oButton1  := TButton():New(050, 010, "Folder 1"    , oFolder1:aDialogs[1], {||MsgRefresh1(cGet1)} , 50, 10, , , .F., .T., .F., , .F., , , .F.)
+	oButton2  := TButton():New(050, 010, "Folder 2"    , oFolder1:aDialogs[2], {||MsgRefresh1(cGet2)} , 50, 10, , , .F., .T., .F., , .F., , , .F.)
+	oButton3  := TButton():New(050, 010, "Folder 3"    , oFolder1:aDialogs[3], {||MsgRefresh1(cGet3)} , 50, 10, , , .F., .T., .F., , .F., , , .F.)
+	oButton4  := TButton():New(050, 010, "Folder 4"    , oFolder1:aDialogs[4], {||MsgRefresh1(cGet4)} , 50, 10, , , .F., .T., .F., , .F., , , .F.)
+
+	oDlg:Activate(,,,.T.)
+
+	//ACTIVATE DIALOG odlg CENTERED
+RETURN
+
+static function MsgRefresh1(cGet1)
+    FWAlertSuccess(cGet1,"sucesso")
+    cGet1 := space(20)
+	oGet1:Refresh()
+return
+
+static function MsgRefresh2(cGet2)
+    FWAlertSuccess(cGet2,"sucesso")
+    cGet2 := space(20)
+	oGet2:Refresh()
+return
+
+static function MsgRefresh3(cGet3)
+    FWAlertSuccess(cGet3,"sucesso")
+    cGet3 := space(20)
+	oGet3:Refresh()
+return
+
+static function MsgRefresh4(cGet4)
+    FWAlertSuccess(cGet4,"sucesso")
+    cGet3 := space(20)
+	oGet3:Refresh()
+return

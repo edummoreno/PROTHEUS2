@@ -1,0 +1,83 @@
+#INCLUDE 'PROTHEUS.CH'
+#INCLUDE 'RWMAKE.CH'
+#INCLUDE 'FONT.CH'
+#INCLUDE 'COLORS.CH'
+
+/*ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ
+±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
+±±ÚÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄ¿±±
+±±³Programa  ³         ³ Autor ³                       ³ Data ³           ³±±
+±±ÃÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄ´±±
+±±³Locacao   ³                  ³Contato ³                                ³±±
+±±ÃÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´±±
+±±³Descricao ³                                                            ³±±
+±±ÃÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´±±
+±±³Parametros³                                                            ³±±
+±±ÃÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´±±
+±±³Retorno   ³                                                            ³±±
+±±ÃÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´±±
+±±³Aplicacao ³                                                            ³±±
+±±ÃÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´±±
+±±³Uso       ³                                                            ³±±
+±±ÃÄÄÄÄÄÄÄÄÄÄÁÄÄÄÂÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´±±
+±±³Analista Resp.³  Data  ³                                               ³±±
+±±ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´±±
+±±³              ³  /  /  ³                                               ³±±
+±±³              ³  /  /  ³                                               ³±±
+±±ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ±±
+±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
+ßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßß*/
+
+User Function TelaDesigner()
+
+    /*ÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ±±
+    ±± Declaração de cVariable dos componentes                                 ±±
+    Ù±±ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ*/
+    Private cGCPF      := Space(14)
+    Private cGnome     := Space(20)
+    //Private cSCPF      := Space(1)
+    //Private cSCripto   := Space(1)
+    //Private cSHow      := Space(1)
+    //Private cSNome     := Space(1)
+    Private lCbuy      := .F.
+    Private lCSell     := .F.
+    Private nCCripto  
+    Private nRMenu   
+
+    /*ÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ±±
+    ±± Declaração de Variaveis Private dos Objetos                             ±±
+    Ù±±ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ*/
+    SetPrvt("oFont","oDlg","oSNome","oSCPF","oSCripto","oSHow","oBmp","oGnome","oGCPF","oRMenu","oCCripto")
+    SetPrvt("oCbuy","oCSell","oLBox","oBtn","oGroup")
+
+    /*ÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ±±
+    ±± Definicao do Dialog e todos os seus componentes.                        ±±
+    Ù±±ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ*/
+    oFont      := TFont():New( "Lucida Console",0,-14,,.F.,0,,400,.F.,.F.,,,,,, )
+    oDlg       := MSDialog():New( 109,223,484,1118,"primeira tela designer",,,.F.,,,,,,.T.,,,.T. )
+    
+    oSNome   := TSay():New(004, 012, {||"Nome"}           , oDlg, , oFont, .F., .F., .F., .T., CLR_BLACK, CLR_WHITE, 032, 008)
+    oSCPF    := TSay():New(044, 012, {||"CPF"}            , oDlg, , oFont, .F., .F., .F., .T., CLR_BLACK, CLR_WHITE, 032, 008)
+    oSCripto := TSay():New(004, 212, {||"CriptoMoeda"}    , oDlg, , oFont, .F., .F., .F., .T., CLR_BLACK, CLR_WHITE, 052, 008)
+    oSHow    := TSay():New(080, 012, {||"como voce está?"}, oDlg, , oFont, .F., .F., .F., .T., CLR_BLACK, CLR_WHITE, 060, 008)
+    
+    oBmp       := TBitmap():New( 096,236,052,052,,"C:\TOTVS12.1.33\Protheus\protheus_data\system\imagens\bitcoin.bmp",.F.,oDlg,,,.T.,.T.,,"",.T.,,.T.,,.F. )
+    oGnome := TGet():New(020, 012, {|u| If(PCount()>0,cGnome:=u,cGnome)}, oDlg, 060, 010, ''                 , , CLR_BLACK, CLR_WHITE, , , , .T., "", , , .F., .F., , .F., .F., "", "cGnome", ,)
+    oGCPF  := TGet():New(060, 012, {|u| If(PCount()>0,cGCPF:=u,cGCPF)}  , oDlg, 060, 010, '@E 999.999.999-99', , CLR_BLACK, CLR_WHITE, , , , .T., "", , , .F., .F., , .F., .F., "", "cGCPF" , ,)
+    oGroup     := TGroup():New( 020,100,072,192,"Sexo",oDlg,CLR_BLACK,CLR_WHITE,.T.,.F. )
+    
+    oRMenu     := TRadMenu():New( 034,106,{"Masculino","Feminino"},{|u| If(PCount()>0,nRMenu:=u,nRMenu)},oDlg,,,CLR_BLACK,CLR_WHITE,"",,,072,26,,.F.,.F.,.T. )
+    
+    oCCripto   := TComboBox():New( 020,212,{|u| If(PCount()>0,nCCripto:=u,nCCripto)},{"bitcoin","ethereum","litecoin","dogecoin"},072,011,oDlg,,,,CLR_BLACK,CLR_WHITE,.T.,oFont,"",,,,,,,nCCripto )
+    oGrp       := TGroup():New( 020,300,072,392,"Posição",oDlg,CLR_BLACK,CLR_WHITE,.T.,.F. )
+    
+    oCbuy  := TCheckBox():New(032, 304, "Comprado", {|u| If(PCount()>0,lCbuy:=u,lCbuy)}  , oGrp, 048, 008, , , oFont, , CLR_BLACK, CLR_WHITE, , .T., "", ,)
+    oCSell := TCheckBox():New(052, 304, "Vendido" , {|u| If(PCount()>0,lCSell:=u,lCSell)}, oGrp, 048, 008, , , oFont, , CLR_BLACK, CLR_WHITE, , .T., "", ,)
+    
+    oLBox      := TListBox():New( 092,012,,{"bullish","vendido","hodl"},060,048,,oDlg,,CLR_BLACK,CLR_WHITE,.T.,,,oFont,"",,,,,,, )
+    oBtn       := TButton():New( 112,100,"Mostrar Elementos",oDlg,{||MsgInfo(cGnome,"")},080,012,,,,.T.,,"",,,,.F. )
+
+    oDlg:Activate(,,,.T.)
+
+Return
+

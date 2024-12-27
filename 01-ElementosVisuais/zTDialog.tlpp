@@ -1,0 +1,14 @@
+#include 'totvs.ch'
+
+//@see https://tdn.totvs.com/display/tec/TDialog
+user function zTDialog()
+//toda classe precisa ser instanciada
+	local oDlg1
+
+	oDlg1 := TDialog():New(180,180,550,700,'Exemplo TDialog',,,,,CLR_BLACK,CLR_WHITE,,,.T.)
+
+	oDlg1:Activate(,,,.T.,{||msgstop('validou!'),.T.},,{||msgstop('iniciando')} )
+
+
+return
+

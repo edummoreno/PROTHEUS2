@@ -1,0 +1,7 @@
+#include    'totvs.ch'
+
+//tlpp cria um modulo?
+user function ESPNOME()
+	cRet := "ADVPL2"
+
+RETURN cRet

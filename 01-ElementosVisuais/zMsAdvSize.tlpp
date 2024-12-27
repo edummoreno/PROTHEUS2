@@ -1,0 +1,43 @@
+#include 'totvs.ch'
+
+//@see https://efacildemais.blogspot.com/2011/06/msadvsize-dimensionamento-de-janelas-no.html
+user function zMsAdvSize()
+	local oDlg,oButton,oButton2,oButton3,oButton4,oButton5
+	local oSay1,oSay2,oSay3,oSay4,oSay5,oSay6
+	local oFont,oFont1
+    local aSize := MsAdvSize()
+
+	oDlg := TDialog():New(aSize[7], aSize[1], aSize[6], aSize[5], 'Exemplo TDialog', , , , , CLR_BLACK, CLR_WHITE, , , .T.)
+    
+	//oFont  := TFont():New('Courier new',,60,.T.)
+	//oFont1 := TFont():New('Courier new',,20,.F.)
+    //obs TFont tem que ficar primeiro
+	oFont  := TFont():New('Comic Sans MS', , 16, , .T., , , , , .T., .T.)
+	oFont1 := TFont():New('Arial Black'  , , 12, , .F., , , , , .F., .F.)
+
+    /*
+    1º coordenada vertical
+    2º coordenada horizontal
+    3º titulo do botão
+    4º Elemento onde ele será fixado
+    5º Ação executada ao clica no botão ao clicar com o botão esquerdo do mouse
+    */                      //1    2     3              4      5
+	oButton  := TButton():New(020, 050, "Clientes"    , oDlg, {||MATA030()} , 50, 10, ,oFont1, .F., .T., .F., , .F., , , .F.)
+	oButton2 := TButton():New(040, 050, "Fornecedores", oDlg, {||MATA020()} , 50, 10, ,oFont1, .F., .T., .F., , .F., , , .F.)
+	oButton3 := TButton():New(060, 050, "Produtos"    , oDlg, {||MATA010()} , 50, 10, ,oFont1, .F., .T., .F., , .F., , , .F.)
+	oButton4 := TButton():New(080, 050, "Bancos"      , oDlg, {||MATA070()} , 50, 10, ,oFont1, .F., .T., .F., , .F., , , .F.)
+	oButton5 := TButton():New(100, 050, "Fechar"      , oDlg, {||oDlg:End()}, 50, 10, ,oFont1, .F., .T., .F., , .F., , , .F.)
+
+	//objeto := Clase:Metodo
+	//                  1   2     3                            4    5 6
+	oSay1 := TSay():New(01, 10, {|| 'Telinha Personalizada' }, oDlg, ,oFont , , , , .T., , , 400, 300, , , , , ,)
+	oSay2 := TSay():New(10, 50, {|| 'abrir clientes' }       , oDlg, ,oFont1, , , , .T., , , 400, 300, , , , , ,)
+	oSay3 := TSay():New(30, 50, {|| 'abir Fornecedores' }    , oDlg, ,oFont1, , , , .T., , , 400, 300, , , , , ,)
+	oSay4 := TSay():New(50, 50, {|| 'abir Produtos' }        , oDlg, ,oFont1, , , , .T., , , 400, 300, , , , , ,)
+	oSay5 := TSay():New(70, 50, {|| 'abir Bancos' }          , oDlg, ,oFont1, , , , .T., , , 400, 300, , , , , ,)
+	oSay6 := TSay():New(90, 50, {|| 'Fechar' }               , oDlg, ,oFont1, , , , .T., , , 400, 300, , , , , ,)
+
+	oDlg:Activate(,,,.T.)
+
+
+return

@@ -1,0 +1,16 @@
+#include    'totvs.ch'
+
+//@see https://tdn.totvs.com/display/tec/Construtor+TPanel%3ANew
+user function zTPanel()
+	local oDlg,oPanel1,oGet1,oSay1
+	local cGet := space(15)
+
+	oDlg := TDialog():New(0,0,300,300,'TPanel',,,,,CLR_BLACK,CLR_WHITE,,,.T.)
+
+	oPanel1 := tPanel():New(01,01,"",oDlg,,.T.,,CLR_YELLOW,CLR_BLUE,110,110)
+	oSay1 := TSay():New(20, 10, {|| 'oSay' }, oPanel1, , , , , , .T., , , 400, 300, , , , , ,)
+	oGet1 := TGet():New(30, 10 , {|u|IIF(PCount()>0,cGet:=u,cGet)}, oPanel1, 060, 010, "@!", , 0, , , .F., , .T., , .F., , .F., .F., , .F., .F., , cGet, , , ,)
+
+	oDlg:Activate(,,,.T.)
+
+RETURN

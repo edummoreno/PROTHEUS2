@@ -1,0 +1,76 @@
+#include 'totvs.ch'
+
+//@see tdn.totvs.com/pages/releaseview.action?pageId=24347041
+//@see https://terminaldeinformacao.com/knowledgebase/reclock/
+//@see https://tdn.totvs.com/display/public/framework/DBSeek
+user function zTGet2()
+	local oDlg,oButton,oButton2
+	local oSay1
+	local cGet1 := space(6)
+	local cGet2 := space(2)
+	local oGet1,oGet2 //recebe a classe
+
+	oDlg := TDialog():New(0, 0, 200, 500, 'Bloqueando/Desbloqueando Cliente', , , , , CLR_BLACK, CLR_WHITE, , , .T.)
+    //objeto := Clase:Metodo
+	//                  1   2     3                            4    5 6
+	oSay1   := TSay():New(10, 10 , {|| 'CLIENTE' }          , oDlg, , , , , , .T., , , 400, 300, , , , , ,)
+	oSay2   := TSay():New(10, 080, {|| 'LOJA' }             , oDlg, , , , , , .T., , , 400, 300, , , , , ,)
+
+	oGet1 := TGet():New(30, 10 , {|u|IIF(PCount()>0,cGet1:=u,cGet1)}, oDlg, 060, 010, "@!", , 0, , , .F., , .T., , .F., , .F., .F., , .F., .F., , cGet1, , , ,)
+	
+	oGet1:CF3   := "SA1"
+    oGet2 := TGet():New(30, 080, {|u|IIF(PCount()>0,cGet2:=u,cGet2)}, oDlg, 060, 010, "@!", , 0, , , .F., , .T., , .F., , .F., .F., , .F., .F., , cGet2, , , ,)
+
+    /*
+    1º coordenada vertical
+    2º coordenada horizontal
+    3º titulo do botão
+    4º Elemento onde ele será fixado
+    5º Ação executada ao clica no botão ao clicar com o botão esquerdo do mouse
+    */                      //1    2     3              4      5
+	oButton    := TButton():New(050, 010, "Bloquear"   , oDlg, {||zBloquear(cGet1,cGet2)}    , 50, 10, , , .F., .T., .F., , .F., , , .F.)
+	oButton2   := TButton():New(050, 080, "Desbloquear", oDlg, {||zDesbloquear(cGet1,cGet2)}, 50, 10, , , .F., .T., .F., , .F., , , .F.)
+
+	
+	oDlg:Activate(,,,.T.)
+
+return
+
+static function zBloquear(cCod,cLoja)
+    aArea := GetArea()
+	DBSelectArea("SA1") //seleciona a area
+
+	SA1->(DbSetOrder(1)) //Indice
+	IF SA1->(DBSeek(xFilial("SA1")+cCod+cLoja)) //procura
+		RecLock("SA1",.F.)//.F. para alteração e .T. para inclusão
+		SA1->A1_MSBLQL := '1'
+		SA1->(MsUnlock())
+
+	endif
+	
+
+	MsgInfo(cCod,"Cliente Bloqueado")
+	SA1->(DbCloseArea()) 
+    RestArea(aArea)
+return
+
+
+static function zDesbloquear(cCod,cLoja)
+
+    aArea := GetArea()
+	DBSelectArea("SA1") //seleciona a area
+
+	SA1->(DbSetOrder(1)) //Indice
+	IF SA1->(DBSeek(xFilial("SA1")+cCod+cLoja)) //procura
+
+		RecLock("SA1",.F.)//.F. para alteração e .T. para inclusão
+		SA1->A1_MSBLQL := '2'
+		SA1->(MsUnlock())
+	ENDIF
+
+	MsgInfo(cCod,"Cliente Desbloqueado")
+
+	SA1->(DbCloseArea()) //@See https://terminaldeinformacao.com/knowledgebase/dbclosearea/
+    RestArea(aArea)
+
+return

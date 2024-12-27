@@ -1,0 +1,44 @@
+#include 'totvs.ch'
+
+//@see https://tdn.totvs.com/display/tec/TGroup
+user function zTGroup()
+	local oDlg
+	
+	local oButton1, oButton2
+	local oGroup1,oGroup2
+	private cGet1 := space(30),cGet2 := space(30),cGet3 := space(30),cGet4 := space(30)
+    private oGet1,oGet2,oGet3,oGet4
+
+	oDlg := TDialog():New(0,0,600,410,'TGroup',,,,,CLR_BLACK,CLR_WHITE,,,.T.)
+
+	//Grupo 1
+	//@see https://solutio.inf.br/tgroup/
+    /*
+    1 - Coordenada vertical superior em pixels ou caracteres
+    2 - Coordenada horizontal esquerda em pixels ou caracteres.
+    3 - Coordenada vertical inferior em pixels ou caracteres.
+    4 - Coordenada horizontal direita em pixels ou caracteres.
+    */
+	//                      1  2  3   4
+	oGroup1 := TGroup():New(10,10,100,200,'Grupo 1',oDlg,,,.T.)
+	//cTGet1 := "Get dentro do TGroup1"
+	oGet1 := TGet():New( 20,20,{|u|IIF(PCount()>0,cGet1:=u,cGet1)},oGroup1,100,010,"@!",,0,,,.F.,,.T.,,.F.,,.F.,.F.,,.F.,.F.,,cGet1,,,,)
+	oGet2 := TGet():New( 40,20,{|u|IIF(PCount()>0,cGet2:=u,cGet2)},oGroup1,100,010,"@!",,0,,,.F.,,.T.,,.F.,,.F.,.F.,,.F.,.F.,,cGet2,,,,)
+	oButton1 := TButton():new(060, 020, "OK"    , oGroup1, {||EnviarGets()} , 50, 10, , , .F., .T., .F., , .F., , , .F.)
+
+	oGroup2 := TGroup():New(110,10,210,200,'Grupo 2',oDlg,,,.T.)
+	//cTGet2 := "Get dentro do TGroup2"                                                                               21 ReadOnly
+	oGet3 := TGet():New( 120,20,{|u|IIF(PCount()>0,cGet3:=u,cGet3)},oGroup2,100,010,"@!",,0,,,.F.,,.T.,,.F.,,.F.,.F.,,.T.,.F.,,cGet3,,,,)
+	oGet4 := TGet():New( 140,20,{|u|IIF(PCount()>0,cGet4:=u,cGet4)},oGroup2,100,010,"@!",,0,,,.F.,,.T.,,.F.,,.F.,.F.,,.T.,.F.,,cGet4,,,,)
+	oButton2 := TButton():new(160, 020, "OK"    , oGroup2, {||alert("OK")} , 50, 10, , , .F., .T., .F., , .F., , , .F.)
+
+	oDlg:Activate(,,,.T.)
+return
+
+static function EnviarGets()
+	cGet3 := cGet1
+	cGet4 := cGet2
+
+    oGet3:Refresh()
+    oGet4:Refresh()
+return
